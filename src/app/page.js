@@ -85,10 +85,10 @@ export default function Home() {
     setLoading(true);
     setError(null);
     try {
-      const API_URL = process.env.NODE_ENV === 'production' 
-        ? '/api/generate_route' 
+      const API_URL = process.env.NODE_ENV === 'production'
+        ? 'https://wisatageneticalgorithm-production.up.railway.app/api/generate_route'
         : 'http://localhost:8000/api/generate_route';
-        
+
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
