@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from fastapi.middleware.cors import CORSMiddleware
 from ga_engine import run_ga
+from mangum import Mangum
 
 app = FastAPI()
 
@@ -20,7 +21,7 @@ class RouteRequest(BaseModel):
     banned_locations: List[str] = []
     liked_locations: List[str] = []
 
-@app.post("/api/generate_route")
+@app.post("/generate_route")
 def generate_route(req: RouteRequest):
     try:
         import traceback
@@ -39,3 +40,5 @@ def generate_route(req: RouteRequest):
 @app.get("/")
 def health_check():
     return {"status": "ok"}
+
+handler = Mangum(app, lifespan="off")
