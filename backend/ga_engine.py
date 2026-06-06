@@ -10,10 +10,10 @@ SEED = 42
 random.seed(SEED)
 np.random.seed(SEED)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # LOAD DATASET
-df = pd.read_csv(os.path.join(BASE_DIR, 'Dataset Wisata Yogyakarta - lokasi_wisata.csv'))
+df = pd.read_csv(os.path.join(BASE_DIR, 'data', 'Dataset Wisata Yogyakarta - lokasi_wisata.csv'))
 
 def jam_str_to_float(s):
     s = str(s).strip()
@@ -69,7 +69,7 @@ df['kategori_utama'] = df['kategori'].map(KATEGORI_UTAMA).fillna('Lainnya')
 N = len(df)
 
 # LOAD MATRIKS JARAK
-dm_raw = pd.read_csv(os.path.join(BASE_DIR, 'Dataset Wisata Yogyakarta - matriks_jarak.csv'))
+dm_raw = pd.read_csv(os.path.join(BASE_DIR, 'data', 'Dataset Wisata Yogyakarta - matriks_jarak.csv'))
 
 def parse_jarak(val):
     try:
