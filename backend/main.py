@@ -22,14 +22,19 @@ class RouteRequest(BaseModel):
 
 @app.post("/api/generate_route")
 def generate_route(req: RouteRequest):
-    result = run_ga(
-        budget_maks=req.budget_maks,
-        jam_mulai=req.jam_mulai,
-        banned_locations=req.banned_locations,
-        liked_locations=req.liked_locations,
-        n_gen=300
-    )
-    return result
+    try:
+        import traceback
+        result = run_ga(
+            budget_maks=req.budget_maks,
+            jam_mulai=req.jam_mulai,
+            banned_locations=req.banned_locations,
+            liked_locations=req.liked_locations,
+            n_gen=300
+        )
+        return result
+    except Exception as e:
+        import traceback
+        return {"error": str(e), "traceback": traceback.format_exc()}
 
 @app.get("/")
 def health_check():

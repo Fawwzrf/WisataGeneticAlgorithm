@@ -101,6 +101,7 @@ export default function Home() {
       });
       if (!res.ok) throw new Error('Failed to fetch route');
       const data = await res.json();
+      if (data.error) throw new Error(data.error + " | " + data.traceback);
       setRouteData(data);
       
       // Sinkronisasi state setelah berhasil
